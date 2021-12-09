@@ -1,0 +1,63 @@
+﻿@model IEnumerable<U30SampleApp.Models.ProductDetails>
+@{
+    ViewBag.Title = "OrderReview";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My Order</h2>
+
+@{ int sum = 0;}
+
+<div id="dvContents">
+    <table class="table table-hover" width="100%">
+        <thead>
+            <tr>
+                <th>Phone ID</th>
+                <th>Mobile Name</th>
+                <th>Colour</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model)
+            {
+                <tr>
+                    <td>@x.PhoneID</td>
+                    <td>@x.PhoneName</td>
+                    <td>@x.Colour</td>
+                    <td><img id="img1" src="~/Images/@x.Image" height="100" width="75" /></td>
+                    <td>@x.Price.ToString("£0.00")</td>
+                    <td>
+                        <button id="btn_delete" class="label label-primary" data-slno="@x.PhoneID" onclick="location.href='@Url.Action("Remove","AddToOrder",x)'">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+        @foreach (var x in Model)
+        {
+            sum = Convert.ToInt32(x.Price) + sum;
+        }
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <b>Total</b>
+                </td>
+                <td>@sum.ToString("£0.00")</td>
+            </tr>
+        </tfoot>
+    </table>
+    <div id="footer">
+    </div>
+    <button type="button" id="btnPrint" class="btn btn-primary">Print</button>
+    <a id="btn_home" class="btn btn-success" href="@Url.Action("Index", "Home")">Continue Shopping</a>
+    <button type="button" class="btn btn-warning">Place Order</button>
+</div>
+

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<U30SampleApp.Models.Phones>
+@{
+    ViewBag.Title = "Phones Direct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>Welcome to Phones Direct</h1>
+</div>
+
+<div class="row">
+    @foreach (var m in Model)
+    {<div class="col-md-4">
+            <div class="row">
+                <h4>
+                    <span id="phoneName" style="color:darkred">
+                        @m.PhoneName
+                    </span>
+                </h4>
+                <p>
+                    <span class="glyphicon glyphicon-heart" style="color:red;pointer-events:fill" contextmenu="Added To WishList"> </span>
+                </p>
+            </div>
+            <p>
+                <img src="../Images/@m.Image" style="overflow:hidden; position:relative; width:200px; height:200px;" />
+            </p>
+            <p>
+                <a class="btn btn-default" href="@Url.Action("ProductDetails","Home",m)"> View More </a>
+            </p>
+            <p>
+                <span class="glyphicon glyphicon-shopping-cart" style="color:green"></span>
+            </p>
+
+        </div>
+    }
+</div>
